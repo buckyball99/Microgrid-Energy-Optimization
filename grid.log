@@ -1,0 +1,43 @@
+GLPSOL--GLPK LP/MIP Solver 5.0
+Parameter(s) specified in the command line:
+ --log grid.log --write /var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpw2digflg.glpk.raw
+ --wglp /var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpnitgfiu1.glpk.glp
+ --cpxlp /var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpperaogcs.pyomo.lp
+Reading problem data from '/var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpperaogcs.pyomo.lp'...
+/var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpperaogcs.pyomo.lp:681: warning: lower bound of variable 'x171' redefined
+/var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpperaogcs.pyomo.lp:681: warning: upper bound of variable 'x171' redefined
+108 rows, 96 columns, 227 non-zeros
+12 integer variables, all of which are binary
+693 lines were read
+Writing problem data to '/var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpnitgfiu1.glpk.glp'...
+615 lines were written
+GLPK Integer Optimizer 5.0
+108 rows, 96 columns, 227 non-zeros
+12 integer variables, all of which are binary
+Preprocessing...
+72 rows, 83 columns, 178 non-zeros
+12 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  4.000e-03  max|aij| =  1.053e+00  ratio =  2.632e+02
+GM: min|aij| =  8.453e-01  max|aij| =  1.183e+00  ratio =  1.399e+00
+EQ: min|aij| =  7.207e-01  max|aij| =  1.000e+00  ratio =  1.388e+00
+2N: min|aij| =  5.000e-01  max|aij| =  1.053e+00  ratio =  2.105e+00
+Constructing initial basis...
+Size of triangular part is 72
+Solving LP relaxation...
+GLPK Simplex Optimizer 5.0
+72 rows, 83 columns, 178 non-zeros
+      0: obj =  -1.425947368e+02 inf =   6.788e+02 (11)
+     20: obj =  -3.198000000e+02 inf =   0.000e+00 (0)
+*    53: obj =  -4.824289474e+02 inf =   8.527e-14 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++    53: mip =     not found yet >=              -inf        (1; 0)
++    58: >>>>>  -4.824289474e+02 >=  -4.824289474e+02   0.0% (4; 0)
++    58: mip =  -4.824289474e+02 >=     tree is empty   0.0% (0; 7)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.2 Mb (182331 bytes)
+Writing MIP solution to '/var/folders/sw/987fj3xn4_sbrkjd_px3yrcm0000gn/T/tmpw2digflg.glpk.raw'...
+213 lines were written
