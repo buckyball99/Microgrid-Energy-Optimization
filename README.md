@@ -10,8 +10,8 @@ The model optimizes the energy flow in a microgrid system consisting of renewabl
 
 1. **Battery Efficiency**:
    - The battery retains its charge from one time state to the next, with no idle depletion.
-   - The charging efficiency is \( 95\% \), meaning the actual charge rate is \( 0.95 \times \text{charge\_rate} \).
-   - The discharging efficiency is \( 95\% \), meaning the actual discharge rate is \( \frac{\text{discharge\_rate}}{0.95} \).
+   - The charging efficiency is \( 95\% \), meaning the actual charge rate is $0.95 \times \text{ChargeRate}$.
+   - The discharging efficiency is \( 95\% \), meaning the actual discharge rate is $\frac{\text{DischargeRate}}{0.95}$.
 
 2. **Energy Sources**:
    - Two source nodes: one supplying renewable energy (free) and the other supplying energy at the market price.
@@ -20,23 +20,23 @@ The model optimizes the energy flow in a microgrid system consisting of renewabl
    - The model prioritizes minimizing costs, which means the grid imports only enough energy to satisfy demand.
 
 4. **Battery Constraints**:
-   - The maximum charging and discharging rate is \( 250 \text{ kWh} \), considered before efficiency losses.
-   - The battery has a minimum charge state of \( 100 \text{ kWh} \) and a maximum charge state of \( 950 \text{ kWh} \).
+   - The maximum charging and discharging rate is 250 kwh, considered before efficiency losses.
+   - The battery has a minimum charge state of 100 kWh and a maximum charge state of 950 kWh.
 
 ## Model Parameters
 
 - **T**: Set of time indices from \( 0 \) to \( 11 \).
-- **Max\_Cap**: Maximum capacity of the battery = \( 1000 \text{ kWh} \).
+- **Max\_Cap**: Maximum capacity of the battery = \( 1000  kWh \).
 - **Charge\_Eff**: Charging efficiency of the battery = \( 0.95 \).
 - **Discharge\_Eff**: Discharging efficiency of the battery = \( 0.95 \).
-- **Min\_C\_State**: Minimum charge the battery can hold = \( 100 \text{ kWh} \).
-- **Max\_C\_State**: Maximum charge the battery can hold = \( 950 \text{ kWh} \).
-- **Max\_Charge\_Discharge\_Rate**: Maximum energy that can be charged or discharged = \( 250 \text{ kWh} \).
+- **Min\_C\_State**: Minimum charge the battery can hold = \( 100 kWh \).
+- **Max\_C\_State**: Maximum charge the battery can hold = \( 950  kWh \).
+- **Max\_Charge\_Discharge\_Rate**: Maximum energy that can be charged or discharged = \( 250  kWh \).
 - **Price**: The price matrix for energy bought or sold at each time index.
 - **Demand**: Customer demand at each time index.
 - **Solar\_Gen**: Solar energy generation at each time index.
 - **Wind\_Gen**: Wind energy generation at each time index.
-- **Initial\_Charge**: Initial charge of the battery = \( 500 \text{ kWh} \).
+- **Initial\_Charge**: Initial charge of the battery = \( 500 kWh \).
 
 ## Model Decision Variables
 

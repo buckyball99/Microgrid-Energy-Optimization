@@ -1,0 +1,105 @@
+altair==5.3.0
+appnope @ file:///Users/cbousseau/work/recipes/ci_py311/appnope_1677917710869/work
+asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
+attrs==23.2.0
+backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
+blinker==1.8.2
+branca==0.7.2
+cachetools==5.3.3
+certifi==2024.6.2
+charset-normalizer==3.3.2
+click==8.1.7
+comm @ file:///Users/cbousseau/work/recipes/ci_py311/comm_1677919149446/work
+contourpy==1.2.1
+cycler==0.12.1
+debugpy @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_563_nwtkoc/croot/debugpy_1690905063850/work
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+et-xmlfile==1.1.0
+executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+filelock==3.15.1
+folium==0.17.0
+fonttools==4.53.0
+fsspec==2024.6.0
+geographiclib==2.0
+geopy==2.4.1
+gitdb==4.0.11
+GitPython==3.1.43
+gurobipy==11.0.2
+idna==3.7
+iniconfig==2.0.0
+ipykernel @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_98tee4lcge/croot/ipykernel_1691121640975/work
+ipython @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_6599f73fa7/croot/ipython_1694181355402/work
+jedi @ file:///Users/cbousseau/work/recipes/ci_py311_2/jedi_1678994967789/work
+Jinja2==3.1.4
+joblib==1.4.2
+jsonschema==4.22.0
+jsonschema-specifications==2023.12.1
+jupyter_client @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_58w2siozyz/croot/jupyter_client_1699455907045/work
+jupyter_core @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_782yoyc_98/croot/jupyter_core_1698937318631/work
+kiwisolver==1.4.5
+lightning-utilities==0.11.2
+markdown-it-py==3.0.0
+MarkupSafe==2.1.5
+matplotlib==3.9.0
+matplotlib-inline @ file:///Users/cbousseau/work/recipes/ci_py311/matplotlib-inline_1677918241899/work
+mdurl==0.1.2
+mpmath==1.3.0
+nest-asyncio @ file:///Users/cbousseau/work/recipes/ci_py311/nest-asyncio_1677912430289/work
+networkx==3.3
+numpy==1.26.4
+openpyxl==3.1.5
+packaging @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_6dm6d4jd_t/croot/packaging_1693575176524/work
+pandas==2.2.2
+parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
+pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
+pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
+pillow==10.3.0
+platformdirs @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_a8u4fy8k9o/croot/platformdirs_1692205661656/work
+pluggy==1.5.0
+ply==3.11
+prompt-toolkit @ file:///Users/cbousseau/work/recipes/ci_py311/prompt-toolkit_1677918689663/work
+protobuf==5.27.2
+psutil @ file:///Users/cbousseau/work/recipes/ci_py311_2/psutil_1678995687212/work
+ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
+PuLP==2.8.0
+pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
+pyarrow==16.1.0
+pydeck==0.9.1
+Pygments @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_29bs9f_dh9/croot/pygments_1684279974747/work
+Pyomo==6.7.3
+pyparsing==3.1.2
+PyQtWebEngine==5.15.6
+PyQtWebEngine-Qt5==5.15.13
+pytest==8.2.2
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz==2024.1
+pyzmq @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_23n9bfwjq5/croot/pyzmq_1686601381911/work
+referencing==0.35.1
+requests==2.32.3
+rich==13.7.1
+rpds-py==0.18.1
+scikit-learn==1.5.0
+scipy==1.13.1
+seaborn==0.13.2
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+skorch==1.0.0
+smmap==5.0.1
+stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+streamlit==1.36.0
+streamlit_folium==0.21.0
+sympy==1.12.1
+tabulate==0.9.0
+tenacity==8.5.0
+threadpoolctl==3.5.0
+toml==0.10.2
+toolz==0.12.1
+torch==2.3.1
+torchmetrics==1.4.0.post0
+tornado @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3a5nrn2jeh/croot/tornado_1696936974091/work
+tqdm==4.66.4
+traitlets @ file:///Users/cbousseau/work/recipes/ci_py311/traitlets_1677911650502/work
+typing_extensions==4.12.2
+tzdata==2024.1
+urllib3==2.2.2
+wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+xyzservices==2024.6.0
