@@ -59,49 +59,31 @@ $$\text{Minimize} \quad \sum_{t \in T} \text{Price}_t \times (\text{EnergyBought
 ## Model Constraints
 
 1. **Battery Constraint**:
-   $$
-   \text{BState}(t) = \text{BState}(t-1) + \text{ChargeEff} \times \text{ChargeR}(t) - \frac{\text{DischargeR}(t)}{\text{DischargeEff}} \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{BState}(t) = \text{BState}(t-1) + \text{ChargeEff} \times \text{ChargeR}(t) - \frac{\text{DischargeR}(t)}{\text{DischargeEff}} \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 2. **Minimum Battery State**:
-   $$
-   \text{BState}(t) \geq \text{MinCState} \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{BState}(t) \geq \text{MinCState} \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 3. **Maximum Battery State**:
-   $$
-   \text{BState}(t) \leq \text{MaxCState} \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{BState}(t) \leq \text{MaxCState} \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 4. **Grid Import Constraint**:
-   $$
-   \text{GridI}(t) = \text{ChargeR}(t) + \text{RelativeFlow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{GridI}(t) = \text{ChargeR}(t) + \text{RelativeFlow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 5. **Grid Export Constraint**:
-   $$
-   \text{GridE}(t) = \text{DischargeR}(t) + \text{RelativeFlow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{GridE}(t) = \text{DischargeR}(t) + \text{RelativeFlow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 6. **Source Energy Constraint**:
-   $$
-   \text{GridI}(t) \leq \text{SolarGen}(t) + \text{WindGen}(t) + \text{EnergyBought}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{GridI}(t) \leq \text{SolarGen}(t) + \text{WindGen}(t) + \text{EnergyBought}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 7. **Customer Demand Constraint**:
-   $$
-   \text{GridE}(t) = \text{Demand}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\text{GridE}(t) = \text{Demand}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 8. **Charge Binary Constraint**:
-   $$
-   \frac{\text{ChargeR}(t)}{\text{MaxChargeDischargeRate}} \leq \text{ChargeBinary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\frac{\text{ChargeR}(t)}{\text{MaxChargeDischargeRate}} \leq \text{ChargeBinary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 9. **Discharge Binary Constraint**:
-   $$
-   \frac{\text{DischargeR}(t)}{\text{MaxChargeDischargeRate}} \leq 1 - \text{ChargeBinary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
-   $$
+   $$\frac{\text{DischargeR}(t)}{\text{MaxChargeDischargeRate}} \leq 1 - \text{ChargeBinary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}$$
 
 ## How to Use
 
