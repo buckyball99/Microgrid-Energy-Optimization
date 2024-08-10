@@ -53,7 +53,8 @@ The model optimizes the energy flow in a microgrid system consisting of renewabl
 
 The objective is to minimize the total cost of purchasing energy while maximizing the revenue from selling energy that meets customer demand.
 
-$$\text{Minimize} \quad \sum_{t \in T} \text{Price}_t \times \left(\text{Energy\_Bought}_t - \text{Grid\_E}_t\right)$$
+<!-- $$\text{Minimize} \quad \sum_{t \in T} \text{Price}_t \times \left(\text{Energy\_Bought}_t - \text{Grid\_E}_t\right)$$ -->
+$$\text{Minimize} \quad \sum_{t \in T} \text{Price}_t \times (\text{EnergyBought}_t - \text{GridE}_t)$$
 
 ## Model Constraints
 
