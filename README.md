@@ -1,109 +1,127 @@
-# Microgrid-Energy-Optimization
-A Pyomo LPP model for optimizing the energy flow in a microgrid with a Battery.
+# Microgrid Optimization Model
 
-This repository contains a Pyomo-based optimization model for managing a microgrid's energy resources, including renewable energy sources, non-renewable energy sources, and battery storage. The goal of the model is to minimize the total energy cost while meeting customer demand and making optimal use of available energy resources.
-Model Overview
+This repository contains the implementation of a Microgrid Optimization Model designed to manage energy sources, battery storage, and grid interactions with the goal of minimizing costs while meeting customer energy demands.
 
-The microgrid optimization model considers a single battery storage system that interacts with both renewable and non-renewable energy sources. The objective is to minimize the cost of energy purchased from non-renewable sources while maximizing revenue from selling energy back to the grid after satisfying customer demand.
-Key Components:
+## Model Overview
 
-    Source Nodes: Includes renewable energy sources (solar and wind generation) and a non-renewable energy source (purchased energy).
-    Battery Storage: Stores energy with certain efficiency losses during charging and discharging processes.
-    Sink Node: Represents the customer demand that must be met at each time period.
+The model optimizes the energy flow in a microgrid system consisting of renewable energy sources (solar and wind), non-renewable energy sources, and battery storage. The primary objectives are to minimize the cost of purchasing non-renewable energy and to maximize revenue from selling excess energy while ensuring that customer demand is met.
 
-Model Assumptions
+## Model Assumptions
 
-    Battery Retention: The battery retains its charge from one time period to the next without idle depletion.
-    Energy Sources: There are two main energy sources:
-        Renewable Source: Free energy from solar and wind generation.
-        Non-Renewable Source: Energy purchased at the market price.
-    Charging Efficiency: Charging the battery is 95% efficient, modeled as:
-    actual_charge_rate=0.95×charge_rate
-    actual_charge_rate=0.95×charge_rate
-    Discharging Efficiency: Discharging the battery is 95% efficient, modeled as:
-    actual_discharge_rate=discharge_rate0.95
-    actual_discharge_rate=0.95discharge_rate​
-    Renewable Energy: Renewable energy is free; there is no cost associated with using it.
-    Demand Satisfaction: The grid can supply just enough energy to satisfy customer demand, no excess energy will be consumed to generate additional revenue.
-    Max Charging/Discharging Rate: The maximum charging and discharging rate of the battery (250 kWh) is considered before efficiency losses.
+1. **Battery Efficiency**: 
+   - The battery retains its charge from one time state to the next, with no idle depletion.
+   - The charging efficiency is 95%, meaning the actual charge rate is `0.95 * charge_rate`.
+   - The discharging efficiency is 95%, meaning the actual discharge rate is `discharge_rate / 0.95`.
 
-Model Parameters
+2. **Energy Sources**: 
+   - Two source nodes: one supplying renewable energy (free) and the other supplying energy at the market price.
 
-The key parameters of the model include:
+3. **Cost Minimization**: 
+   - The model prioritizes minimizing costs, which means the grid imports only enough energy to satisfy demand.
 
-    T: Set of time indices from 0 to 11.
-    Max_Cap: Maximum capacity of the battery =1000kWh=1000kWh.
-    Charge_Eff: Charging efficiency of the battery =0.95=0.95.
-    Discharge_Eff: Discharging efficiency of the battery =0.95=0.95.
-    Min_C_State: Minimum charge state of the battery =100kWh=100kWh.
-    Max_C_State: Maximum charge state of the battery =950kWh=950kWh.
-    Max_Charge_Discharge_Rate: Maximum charging/discharging rate of the battery =250kWh=250kWh.
-    Price: The price of energy bought or sold at each time index.
-    Demand: The customer demand at each time index.
-    Solar_Gen: Solar energy generation at each time index.
-    Wind_Gen: Wind energy generation at each time index.
-    Initial_Charge: Initial charge of the battery =500kWh=500kWh.
+4. **Battery Constraints**: 
+   - The maximum charging and discharging rate is 250 kWh, considered before efficiency losses.
+   - The battery has a minimum charge state of 100 kWh and a maximum charge state of 950 kWh.
 
-Decision Variables
+## Model Parameters
 
-The main decision variables used in the model are:
+- **T**: Set of time indices from 0 to 11.
+- **Max_Cap**: Maximum capacity of the battery = 1000 kWh.
+- **Charge_Eff**: Charging efficiency of the battery = 0.95.
+- **Discharge_Eff**: Discharging efficiency of the battery = 0.95.
+- **Min_C_State**: Minimum charge the battery can hold = 100 kWh.
+- **Max_C_State**: Maximum charge the battery can hold = 950 kWh.
+- **Max_Charge_Discharge_Rate**: Maximum energy that can be charged or discharged = 250 kWh.
+- **Price**: The price matrix for energy bought or sold at each time index.
+- **Demand**: Customer demand at each time index.
+- **Solar_Gen**: Solar energy generation at each time index.
+- **Wind_Gen**: Wind energy generation at each time index.
+- **Initial_Charge**: Initial charge of the battery = 500 kWh.
 
-    B_State: Battery state, representing the energy (kWh) stored in the battery at time index tt.
-    Charge_R: Charging rate of the battery at time index tt.
-    Discharge_R: Discharging rate of the battery at time index tt.
-    Grid_I: Grid import, representing the energy (kWh) imported from all sources at time index tt.
-    Grid_E: Grid export, representing the energy (kWh) supplied to customers at time index tt.
-    Relative_Flow: Represents the flow of energy that is not stored in the battery and is directly supplied to the grid at time index tt.
-    Charge_Binary: Binary variable used to disable simultaneous charging and discharging of the battery.
-    Energy_Bought: Energy (kWh) purchased from non-renewable sources at time index tt.
+## Model Decision Variables
 
-Objective Function
+- **B_State**: Energy (kWh) stored by the battery at time index `t`.
+- **Charge_R**: Energy (kWh) used to charge the battery at time index `t`.
+- **Discharge_R**: Energy (kWh) discharged from the battery at time index `t`.
+- **Grid_I**: Energy (kWh) imported into the grid at time index `t`.
+- **Grid_E**: Energy (kWh) exported to customers to satisfy demand at time index `t`.
+- **Relative_Flow**: Energy (kWh) imported but not stored in the battery, instead sent directly to grid export.
+- **Charge_Binary**: Binary variable restricting simultaneous charging and discharging of the battery.
+- **Energy_Bought**: Non-renewable energy (kWh) purchased at each time index `t`.
 
-The objective is to minimize the total cost of purchasing energy while maximizing revenue from selling energy after satisfying customer demands:
-Minimize∑t∈TPricet×(Energy_Boughtt−Grid_Et)
-Minimizet∈T∑​Pricet​×(Energy_Boughtt​−Grid_Et​)
-Model Constraints
+## Objective Function
 
-    Battery State Constraint: The battery's current charge state is equal to the previous charge state plus effective charging rate minus effective discharging rate.
-    B_State(t)=B_State(t−1)+Charge_Eff×Charge_R(t)−Discharge_R(t)Discharge_Eff
-    B_State(t)=B_State(t−1)+Charge_Eff×Charge_R(t)−Discharge_EffDischarge_R(t)​
+The objective is to minimize the total cost of purchasing energy while maximizing the revenue from selling excess energy after meeting customer demand.
 
-    Minimum Battery Charge Constraint: The battery state must not fall below 100 kWh.
-    B_State(t)≥Min_C_State
-    B_State(t)≥Min_C_State
+$$
+\text{Minimize} \quad \sum_{t \in T} \text{Price}_t \times \left(\text{Energy\_Bought}_t - \text{Grid\_E}_t\right)
+$$
 
-    Maximum Battery Charge Constraint: The battery state must not exceed 950 kWh.
-    B_State(t)≤Max_C_State
-    B_State(t)≤Max_C_State
+## Model Constraints
 
-    Grid Import Constraint: The energy sent to the battery plus the energy directly sent to the grid must equal the grid import energy.
-    Grid_I(t)=Charge_R(t)+Relative_Flow(t)
-    Grid_I(t)=Charge_R(t)+Relative_Flow(t)
+1. **Battery Constraint**: 
+   $$
+   \text{B\_State}(t) = \text{B\_State}(t-1) + \text{Charge\_Eff} \times \text{Charge\_R}(t) - \frac{\text{Discharge\_R}(t)}{\text{Discharge\_Eff}} \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    Grid Export Constraint: The grid export energy must equal the battery discharge energy plus the energy flow coming from the grid.
-    Grid_E(t)=Discharge_R(t)+Relative_Flow(t)
-    Grid_E(t)=Discharge_R(t)+Relative_Flow(t)
+2. **Minimum Battery State**: 
+   $$
+   \text{B\_State}(t) \geq \text{Min\_C\_State} \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    Source Energy Constraint: The grid import energy should be less than or equal to the sum of renewable and non-renewable energy sources.
-    Grid_I(t)≤Solar_Gen(t)+Wind_Gen(t)+Energy_Bought(t)
-    Grid_I(t)≤Solar_Gen(t)+Wind_Gen(t)+Energy_Bought(t)
+3. **Maximum Battery State**: 
+   $$
+   \text{B\_State}(t) \leq \text{Max\_C\_State} \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    Customer Demand Constraint: The grid export energy must satisfy the customer demands.
-    Grid_E(t)=Demand(t)
-    Grid_E(t)=Demand(t)
+4. **Grid Import Constraint**: 
+   $$
+   \text{Grid\_I}(t) = \text{Charge\_R}(t) + \text{Relative\_Flow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    Charge/Discharge Binary Constraints: These constraints prevent simultaneous charging and discharging of the battery.
-    Charge_R(t)Max_Charge_Discharge_Rate≤Charge_Binary(t)
-    Max_Charge_Discharge_RateCharge_R(t)​≤Charge_Binary(t)
-    Discharge_R(t)Max_Charge_Discharge_Rate≤1−Charge_Binary(t)
-    Max_Charge_Discharge_RateDischarge_R(t)​≤1−Charge_Binary(t)
+5. **Grid Export Constraint**: 
+   $$
+   \text{Grid\_E}(t) = \text{Discharge\_R}(t) + \text{Relative\_Flow}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
+6. **Source Energy Constraint**: 
+   $$
+   \text{Grid\_I}(t) \leq \text{Solar\_Gen}(t) + \text{Wind\_Gen}(t) + \text{Energy\_Bought}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    How to Run
+7. **Customer Demand Constraint**: 
+   $$
+   \text{Grid\_E}(t) = \text{Demand}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
 
-    1. Clone the repository to your local machine:
+8. **Charge Binary Constraint**: 
+   $$
+   \frac{\text{Charge\_R}(t)}{\text{Max\_Charge\_Discharge\_Rate}} \leq \text{Charge\_Binary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
+
+9. **Discharge Binary Constraint**: 
+   $$
+   \frac{\text{Discharge\_R}(t)}{\text{Max\_Charge\_Discharge\_Rate}} \leq 1 - \text{Charge\_Binary}(t) \quad \text{for all } t \in \{0, 1, \dots, 11\}
+   $$
+
+## How to Use
+
+1. Clone the repository:
+    ```bash
     git clone https://github.com/buckyball99/Microgrid-Energy-Optimization.git
+    cd Microgrid-Energy-Optimization
+    ```
 
-    2. Install the necessary Python packages
+2. Install the necessary dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-    3. Run the optimization model in a Jupyter notebook or Python script
+3. Run the optimization model:
+
+4. Analyze the results:
+    The results will be saved as output files, and relevant plots will be generated to visualize the energy flow, costs, and renewable energy utilization.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
